@@ -23,8 +23,6 @@ def detect_encoding(file):
     
 home_dir = "/home/dk/project/aitarentee/opwork_gui/src/"
 
-
-
 def is_text_column_by_pattern(series):
     """正規表現でテキスト列を判定"""
     if series.dtype == 'object':
@@ -198,7 +196,7 @@ if page == "データ & ストップワード設定":
     if uploaded_files:
         encoding = detect_encoding(uploaded_files[0])
         # print(f"Detected encoding for: {encoding}")
-        dfs = [pd.read_csv(file) for file in uploaded_files]
+        dfs = [pd.read_csv(file,encoding=encoding) for file in uploaded_files]
         df = pd.concat(dfs).reset_index(drop=True)
         st.session_state.df = df
         st.session_state.cleaned = False  # 新しいファイルをアップロードしたら再度False
