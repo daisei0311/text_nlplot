@@ -12,8 +12,18 @@ import json
 import logging
 import plotly.express as px
 import numpy as np
+import chardet
 
+def detect_encoding(file):
+    rawdata = file.read(10000)  # 最初の10,000バイトを読み込む
+    result = chardet.detect(rawdata)
+    encoding = result['encoding']
+    file.seek(0)  # ファイルポインタを先頭に戻す
+    return encoding
+    
 home_dir = "/home/dk/project/aitarentee/opwork_gui/src/"
+
+
 
 def is_text_column_by_pattern(series):
     """正規表現でテキスト列を判定"""
@@ -186,6 +196,8 @@ if page == "データ & ストップワード設定":
     
     # アップロードされたファイルがあれば読み込み
     if uploaded_files:
+        encoding = detect_encoding(uploaded_files[0])
+        # print(f"Detected encoding for: {encoding}")
         dfs = [pd.read_csv(file) for file in uploaded_files]
         df = pd.concat(dfs).reset_index(drop=True)
         st.session_state.df = df
