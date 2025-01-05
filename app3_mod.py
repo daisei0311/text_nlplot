@@ -149,7 +149,7 @@ if "cleaned" not in st.session_state:
 
 # ---- ここがポイント：stopwords がまだ存在しない場合のみ JSON から読み込む ----
 if "stopwords" not in st.session_state:
-    with open(f'removewords.json', 'r', encoding='utf-8') as file:
+    with open('removewords.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
     # removewordsキーからデフォルトのストップワードを取得
     removewords = data.get("removewords", [])
@@ -186,7 +186,7 @@ if page == "データ & ストップワード設定":
     
     # アップロードされたファイルがあれば読み込み
     if uploaded_files:
-        dfs = [pd.read_csv(file,encoding='shift-jis') for file in uploaded_files]
+        dfs = [pd.read_csv(file,encoding='utf-8') for file in uploaded_files]
         df = pd.concat(dfs).reset_index(drop=True)
         st.session_state.df = df
         st.session_state.cleaned = False  # 新しいファイルをアップロードしたら再度False
