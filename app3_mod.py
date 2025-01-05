@@ -186,7 +186,7 @@ if page == "データ & ストップワード設定":
     
     # アップロードされたファイルがあれば読み込み
     if uploaded_files:
-        dfs = [pd.read_csv(file,encoding='utf-8') for file in uploaded_files]
+        dfs = [pd.read_csv(file) for file in uploaded_files]
         df = pd.concat(dfs).reset_index(drop=True)
         st.session_state.df = df
         st.session_state.cleaned = False  # 新しいファイルをアップロードしたら再度False
