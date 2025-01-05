@@ -31,8 +31,7 @@ MarkupSafe==3.0.2
 matplotlib==3.10.0
 matplotlib-inline==0.1.7
 mdurl==0.1.2
-mecab==0.996.5
-mecab-python3==1.0.10
+mecab-python3
 narwhals==1.20.1
 nest-asyncio==1.6.0
 networkx==3.4.2
